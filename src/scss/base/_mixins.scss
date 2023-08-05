@@ -1,0 +1,42 @@
+@mixin nuevoMixin($transform,$size){
+    font-size: $size;
+    color: $morado;
+    text-transform: $transform;
+}
+
+@mixin telefono{
+    @media (min-width: 480px) {
+        @content; //toma el contenido pasado como argumentos
+    }
+}
+
+@mixin tablet{
+    @media (min-width: 768px) {
+        @content; //toma el contenido pasado como argumentos
+    }
+}
+
+@mixin desktop{
+    @media (min-width: 1200px) {
+        @content; //toma el contenido pasado como argumentos
+    }
+}
+
+@mixin maxtablet{
+    @media (max-width: 768px) {
+        @content; //toma el contenido pasado como argumentos
+    }
+}
+
+//mixin para aplicar css grid
+@mixin grid($columnas, $espaciado){
+    display: grid;
+    grid-template-columns: repeat($columnas, 1fr);
+    gap: $espaciado;
+}
+
+@mixin maxtelefono{
+    @media (max-width: 480px) {
+        @content; //toma el contenido pasado como argumentos
+    }
+}

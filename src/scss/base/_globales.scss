@@ -1,0 +1,55 @@
+//hack de pool irish
+html{
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after{
+    box-sizing: inherit;
+}
+//.... 
+
+body{
+    font-family: $fuentePrincipal;
+    font-size: 1.6rem;
+
+    &.fijar-body{ //& para referirse al elemento padre o sea el body    
+        overflow: hidden;
+    }
+}
+
+p{
+    font-size: 2rem;
+    color: $negro;
+}
+
+.contenedor{
+    max-width: 120rem;
+    width: 95%; //cuando el tamano sea menor a 120rem aplica el width 95%
+    margin: 0 auto; //para centrar
+}
+
+a {
+    text-decoration: none; //le quita el interlineado a los vinculos
+}
+
+img{
+    max-width: 100%; //para hacer todas las imagenes responsivas
+}
+
+//quitar el margen a los headings
+h1,h2,h3{
+    margin: 0;
+}
+
+h1{
+    font-size: 4rem;
+}
+
+h2{
+    font-size: 3.6rem;
+}
+
+h3{
+    font-size: 3rem;
+}

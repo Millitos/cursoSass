@@ -1,0 +1,64 @@
+.info-principal{
+    position: relative;
+    display: flex;
+    background-color: $blanco;
+    max-height: auto;
+    justify-content: center;
+    // overflow: hidden;
+    
+    // .overlay{
+    //     position: absolute;
+    //     width: 100%;
+    //     height: 100%;
+    //     background-color: $verde;
+    // }
+
+    .contenido-infop{
+        display: flex;
+        flex-direction: row;
+        padding: 2rem;
+        gap: $separacion;
+
+        @include maxtelefono{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+        }
+
+    }
+
+    .infop{
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+
+        @include maxtelefono{
+            width: auto;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        h5{
+            color: $rosa;
+            font-weight: $bold;
+        }
+    }
+
+    .imagen{
+        width: 40%;
+        display: flex;
+        align-items: center;
+        // position: relative;
+
+        @include maxtelefono{
+            width: auto;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

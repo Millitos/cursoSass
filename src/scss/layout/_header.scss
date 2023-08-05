@@ -1,0 +1,79 @@
+//forma 1.
+// .header{
+//     background-color: $verde;
+
+//     .contenido-header{ //anidacion
+//         padding: 1rem;
+
+//         h1{
+//             margin: 1rem;
+//         }
+//     }
+// }
+
+//forma 2.
+.header{
+    background-color: $verde;
+
+    //va cambiando el color segun el tamano de pantalla
+    @include telefono{
+        background-color: $verde;
+    }
+
+    @include tablet{
+        background-color: $amarillo;
+    }
+
+    @include desktop{
+        background-color: $rosa;
+    }
+
+    //anidacion
+    .contenido-header{ 
+        // padding: calc(5rem - 3rem) 0rem;
+        padding: $separacion/2 0; //esta diviendo 5 entre 2
+        
+        @include tablet{
+            display: flex;
+            justify-content: space-between; //alinear un elemento a la izq y el otro a la derecha
+            align-items: center; //centra verticalmente
+        }
+    }
+
+    h1{ // pq el h1 tambien pertene al header, es hijo del header
+        color: $blanco;
+        margin-bottom: 1rem;
+        text-align: center;
+
+        //cuando toma el tamano de tablet pone el marginb en 0
+        @include tablet{
+            margin-bottom: 0;
+        }
+
+        @include nuevoMixin('uppercase',3rem);
+    }
+
+    &.fijo{
+        position: fixed;
+        width: 100%;
+        box-shadow: 0 0.3rem 0.1rem #444;
+    }
+
+}
+
+.navegacion-principal{
+    display: flex;
+    gap: 2rem; //separacion entre elementos a
+    justify-content: center; //centra horizontalmente
+
+    a{
+        color: $blanco;
+        font-size: 2rem;
+
+        @include nuevoMixin('lowercase',2rem);
+
+        &:hover{ //toma el elemento a padre, y agg el hover (es sintaxis de sass)
+            color: $amarillo;
+        }
+    }
+}

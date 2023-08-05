@@ -1,0 +1,174 @@
+1. En el terminal escribir: npm init
+    ->Crea un archivo package.json en el cual se van guardando las dependencias necesarias para el proyecto
+    -> Sirve para saber en un equipo de trabajo que versiones y que dependencias estan instaladas, con las
+        que se estan trabajando
+
+2. Dependencias(globales o dependencias del proyecto)   
+    ->Dependencias globales: Las dependencias globales se pueden utilizar en todos los proyectos, como su nombre lo dice
+                                son de manera global, se pueden isntalar desde el pwshell o desde la terminal
+    ->Dependencias del proyecto:Son especificas de cada proyecto y no tienen un instalador como la palabra npm, son
+                                    dependencias que existen en el package.json, se deben instalar en cada proyecto
+                                ->se deben instalar desde la terminal
+    ->Dependencias de desarrollo: Son dependecias que se requieren mientras se esta creando el sitio o pagina
+        gulp es una dependecia de desarrollo, se puede instalar desde el terminal escribiendo: npm i --save-dev gulp
+        (crea en el archivo package.json un elemento -> "devDependencies": {"gulp": "^4.0.2"})
+        Es importante hacerlo de esta manera para que los hosting pueda leer todas las dependecias.
+
+3. para instalar dependecias globales siempre llevan g al inicio
+    -> ejemplo: npm i -g gulp-cli'
+
+4. para instalar dependecias del proyecto: ejemplo -> npm i gulp
+
+5. El archivo package-lock.json, guarda las dependecias que necesita gulp para funcionar correctamente
+    (este archivo nunca se debe editar, se va escribiendo automaticamente mediante vamos instalando dependecias con npm)
+
+6. Carpeta node_modules: almacena todas las dependecias, todo lo que se va descargando
+    -> si la carpeta node_modules se borra, no tendria los archivos necesarias. Se puede recuperar todo nuevamente
+    escribiendo en el terminal npm i, para que instale nuevamente las dependecias en los archivos package.json y 
+    package-lock.json
+
+7. Instalar dependencias locales de desarrollo para el proyecto
+    -> npm i --save-dev gulp-sass node-sass dart-sass
+    -> gulp es la API para comenzar a escribir tareas, tiene una serie de metodos, objetos ,etc. gulp
+    tiene una serie de pluggins en funcion de lo que uno necesite para el proyecto
+    ->gulp-sass es un pluggin para poder compilar codigo sass
+
+8. para poder trabajar con gulp hay que crear un archivo que se debe llamar gulpfile.js.
+    gulp espera que este archivo exista, ahi es donde va a buscar las tareas, las instrucciones
+    -> en el gulpfile.js se colocan las tareas, funciones de js
+
+9. para poner la tarea escrita en el archivo gulpfile.js disponible para gulp
+    ->exports.taskNameGulp = taskGulpfileName; (usualmente se les deja el mismo nombre)
+
+10. para listar las tareas desde el terminal: gulp --tasks
+
+11. para compilar la tarea: gulp nombreTarea (ejemplo: gulp compilarSASS)
+
+12. gulp tiene ciertas reglas para poder compilar correctamente las tareas
+    1. hay que escribir el return en las tareas
+    2. necesita identificar la hoja de estilos de sass, compilarla y guardarla en el disco duro
+
+13. crear una nueva carpeta llamada src
+
+14. dentro de src crear una carpeta llamada js y otra carpeta llamada scss
+
+15. dentro de la carpeta scss creo un archivo nuevo llamado: app.scss
+    -> en este archivo se escribe todo el codigo de sass
+    -> debo decirle al archivo gulpfile.js donde se encuentra el archivo de app.scss
+
+16. escribir en el archivo gulpfile.js: const {src} = require('gulp');
+    ->esto es para traer la dependecia de gulp, con su contenido y funciones, es como importar algo
+    -> en este caso la funcion importada es src, esta sirve para obtener la fuente(source),
+        es donde se encuentra el archivo que voy a compilar en sass
+
+17. .pipe -> es para orden a la ejecucion de las tareas, cuando ya realizo todos los pipes se ejecuta el return
+
+18. despues de ubicar el archivo con el src, debemos compilar la hoja de estilos.
+    1. importamos la dependecia que convierte el codigo de sass a css (no se ponen corchetes pq gulp-sass solo tiene una funcion)
+    2. importamos la funcion dest de la dependecia gulp, esta funcion indica donde se va a almacenar un archivo
+
+19. a partir de esto ya puedo escribir codigo en el archivo app.scss y compilar la funcion compilarSASS,
+    y automaticamente se escribe el codigo css en el archivo app.css dentro la carpeta build
+
+20. gulp-sass necesita dart-sass para funcionar (node-sass era la api anterior para compilar)
+
+21. watch: se ejecuta cuando localiza archivos que han sido cambiados(para no tener que estar compilando desde el terminal,
+    cada vez que se hace un cambio en el archivo scss)
+    -> luego de escribir la funcion la compilo en el terminal: gulp wathArchivos
+    -> luego de compilar la funcion, para poder salir de la misma, hay que presionar dentro
+        del terminal ctrl + c.
+
+22. puedo dividir en diferentes archivos mi codigo de scss para hacerlo mas ordenado y facil de mantener
+    -> para vincular los demas archivos tipo scss al archivo principal, debo poner en los archivos secundarios
+        al inicio del nombre raya al piso: _variables.scss
+
+23. importamos el los archivos secundarios en el archivo principal de scss 
+    -> @import 'base/variables'; -> solo se pone el nombre del archivo secundario sin el rayalpiso
+
+24. para que la funcion watchArchivos escuche todos los cambios de los files tipo scss
+    -> *.scss, de esta manera ya se cargan los cambios hechos en los archivos secundarios
+
+25. crea carpeta 'base' donde se va a guardar el archivo con las variables, mixings
+
+26. crea carpeta 'layout' para guardar los diferentes componentes: header, navegacion...etc
+
+27. /**/* para que tome todos los archivos en diferentes niveles tipo scss que encuentre dentro de la carpeta scss
+
+28. crea file _normalize.scss  y lo importa en el file principal
+
+29. pegar en el archivo _normalize la descarga del link: https://necolas.github.io/normalize.css/
+
+30. crear archivo _globales.scss e importarlo en al file principal (archivo para escribir el codigo
+    tipo scss de los elementos globales del html)
+    ->este archivo es como un reset o default de las caracteristicas pre-establecidas que va a tener la pagina
+
+31. se puede importar el tipo de fuente que se quiere usar en el proyecto, desde: https://fonts.google.com/
+    -> se hace con el import desde el archivo principal
+
+32. crear html
+
+33. se van creando archivos dentro de layout que es donde se dan estilos a los elementos principales estructurales del html
+
+34. crear archivo dentro de carpeta base llamado _mixins.scss
+->se usa principalmente cuando tengo codigo de css que se repite mucho y lo puedo poner en un mixin y luego usarlo en varias partes
+    -> para crear un mixin: @mixin
+    -> si no tiene argumentos poner al final {}, de lo contrario poner ()
+    -> para usar el mixin: @include nombreMixin
+    -> se puede usar el mismo mixin y pasarle como argumento un valor para en alguna caracteristica especifica,
+        darle una condicion diferente (ejemplo:nuevoMixin)
+
+    ->puedo dentro de un mixin pasar muchas propiedades como argumentos, para inyectar ese contenido pasado como argumento,
+        se debe escribir dentro de la declaracion del mixin donde yo quiero que ese contenido se ubique un @content
+
+35. agg el video al html con la etiqueta video
+    ->controls: aparecen los controles de reproduccion,tiempo y volumen etc
+    ->autoplay para que se reproduzca automat cuando se carga la pagina
+    ->loop: se reproduce el video una y otra vez
+
+36. web para aplicar degradados: https://www.colorzilla.com/gradient-editor/
+
+37. para hacer imagenes mas ligeras: tinypng
+
+38. dependecia de desarrollo de gulp para hacer las imagenes del proyecto mas ligeras;
+    -> npm install --save-dev gulp-imagemin
+    -> en el archivo gulpfile.js se importa la dependencia y luego se crea la funcion para compilar con gulp
+    -> para que la dependencia funcione con require se debe instalar las versiones anteriores a la 8.0.0
+     :npm install --save-dev gulp-imagemin@7.1.0
+
+39. instalar una dependencia que nos notifica el proceso que se esta llevando acabo
+    ->npm i --save-dev gulp-notify
+    ->sirve para luego saber que hace esa funcion, se debe escribir el codigo de la siguiente manera:
+        .pipe(notify({message: 'Imagen minificada'}));
+
+40.para transformar las imagenes a formato webp que tiene mejor resolucion que jpg
+    -> npm i --save-dev gulp-webp
+    -> importo la dependencia en el archivo gulpfile.js y luego creo funcion versionWebp
+
+41. creo un objeto en gulpfile.js para guardar los paths o direcciones de las imagenes y poder acceder mas facil
+
+42. creo un archivo dentro de la carpeta base llamado _utilidades.scss
+    ->creo las caracteristicas de las clases bg-verde y bg-amarillo de la seccion line up
+
+43. creo el icono para cada escenario del lineup como un pseudoelemento
+    ->para crear el pseudoelemento, segun en donde se vaya a agregar se debe escribir, en este caso
+        el pseudoelemento se va a agg despues del nombre del escenario, entonces de debe escribir en css
+        dentro del elemento padre: &:after{content:'';....}
+    ->los pseudoelementos no se pueden seleccionar
+
+44.creo el file app.js dentro de la carpeta js
+    ->creo una funcion en el archivo gulpfile.js llama javascript
+    ->escribo la direccion dentro del objeto donde estan los paths para que tome todos los files js
+
+45. instalar gulp-concat, permite unir varios archivos: npm i --save-dev gulp-concat
+    ->importarlo y escribirlo en la funcion javascript dentro del archivo gulpfile.js
+    ->luego de compilar la funcion javascript en el terminal se crea un file bundle.js dentro de la carpeta build
+    ->vinculo el script bundle.js con el html
+:el archivo bundle.js en pocas palabras toma todo el codigo escrito en archivos js y los une en el archivo bundle
+
+46. creo archivo llamado galeria.js y agg dinamicamente las imagenes al html
+
+47. creo file _galeria.scss
+
+48. en el file app.js escribo el codigo de el scrollNav
+
+49. en el mismo file codifico la funcion para dejar la barra de navegacion fija

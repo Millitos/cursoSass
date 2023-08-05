@@ -1,0 +1,33 @@
+1. utiliza sintaxis de node js
+
+const = require('gulp'); //trae las dependencias de codigo ya escrito para utilizarlo
+
+const {series} = require('gulp'); //extrae funcion de series de gulp
+
+function hola(done) {
+    console.log('hola mundo');
+
+    done(); //para decirle a gulp en que momento la funcion debe terminar
+}
+
+//para hacer disponible nuestro codigo de forma externa
+exports.hola = hola; //para llamar funcion desde el terminal: gulp hola
+
+function javascript(done){
+    console.log('compilando javascript');
+
+    done();
+}
+
+exports.javascript = javascript;
+
+2. funcion series: permite ejecutar varias funciones en orden y no tener que llamarlas desde el terminal una por una
+exports.tareas = series(hola, javascript); //desde el terminal se ejecutan -> gulp tareas
+
+
+3. default: es una ejecucion por defecto, al escribir unicamente 'gulp' en el terminal va buscar el que tenga el default
+            y ejecuta las funciones
+exports.default = series(hola, javascript);  //desde el terminal se ejecutan -> gulp 
+
+4. parallel: funciona como series pero ejecuta todas las funciones al mismo tiempo
+exports.tareas = parallel(hola, javascript); //desde el terminal se ejecutan -> gulp tareas

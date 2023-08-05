@@ -1,0 +1,52 @@
+//al poner en video position:relative y en overlay position:absolute.
+//estoy indicando que ese elemento de html va a quedar siempre contenido dentro
+//del elemento padre .video, no se va a salir de esos limites
+.video {
+    position: relative;
+    max-height: 70rem; //limite de altura, puede ser menos pero no mas que eso
+    overflow: hidden; //hace que lo que este porfuera del div se oculte
+
+    //Overlay funciona como el sketch donde doy tamano que va tomar el video
+    .overlay{
+        position: absolute; //dentro de los limites del div padre .video
+        width: 100%;
+        height: 100%;               //(direccion degradado,color de inicio,color fin)
+        // background: linear-gradient(to top, $rosa,$amarillo); //degradado
+
+        /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#891c1e+0,9e37f2+72,ffffff+100&0.8+0,0.5+100 */
+        background: -moz-linear-gradient(-45deg,  rgba(137,28,30,0.8) 0%, rgba(158,55,242,0.58) 72%, rgba(255,255,255,0.5) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg,  rgba(137,28,30,0.8) 0%,rgba(158,55,242,0.58) 72%,rgba(255,255,255,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg,  rgba(137,28,30,0.8) 0%,rgba(158,55,242,0.58) 72%,rgba(255,255,255,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc891c1e', endColorstr='#80ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+    }
+
+    video{
+        display: block; //toma todo el espacio del contenedor padre
+        width: 100%;
+    }
+
+    //centrar verticalmente el titulo
+    .contenido-video{
+        display: flex;
+        align-items: center;
+        height: 100%; //para que tome el total de la altura del div contenedor
+
+        //ubicar verticalmente el titulo y la fecha
+        h2{
+            display: flex;
+            flex-direction: column;
+            color: $blanco;
+            font-size: 7rem;
+            align-items: flex-start; //para que el background rosa con la fecha solo tome el espacio hasta donde acaba el texto contenido
+
+            span{
+                background-color: $rosa;
+                font-size: 2rem;
+                padding: 1rem 2rem;
+                
+            }
+        }
+    }
+
+}

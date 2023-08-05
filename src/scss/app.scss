@@ -1,0 +1,16 @@
+//el orden de los imports es importante
+@import 'base/normalize'; //28
+//google fonts
+@import url('https://fonts.googleapis.com/css2?family=Fraunces&family=Montserrat:wght@300;400;700;900&display=swap');
+@import 'base/variables'; //23
+@import 'base/mixins'; //34
+@import 'base/globales'; //30
+@import 'base/utilidades'; //42
+
+@import 'layout/header';
+@import 'layout/video';
+@import 'layout/infop';
+@import 'layout/lineup'; 
+@import 'layout/galeria';
+@import 'layout/boletos';
+@import 'layout/footer';
