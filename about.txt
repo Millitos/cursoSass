@@ -17,6 +17,10 @@
 3. para instalar dependecias globales siempre llevan g al inicio
     -> ejemplo: npm i -g gulp-cli'
 
+    3.1 Ruta de acceso incorrecta: Si instalaste Gulp localmente en tu proyecto en lugar de globalmente, 
+    es posible que necesites usar el comando local de npm para ejecutar Gulp. 
+    Por ejemplo: npx gulp...
+
 4. para instalar dependecias del proyecto: ejemplo -> npm i gulp
 
 5. El archivo package-lock.json, guarda las dependecias que necesita gulp para funcionar correctamente
@@ -41,6 +45,10 @@
     ->exports.taskNameGulp = taskGulpfileName; (usualmente se les deja el mismo nombre)
 
 10. para listar las tareas desde el terminal: gulp --tasks
+    10.1 En caso tal no deje compilar(ERROR:porque la ejecución de       
+    scripts está deshabilitada en este sistema), ejecutar el pwshell como admin y escribir:
+     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
 
 11. para compilar la tarea: gulp nombreTarea (ejemplo: gulp compilarSASS)
 
